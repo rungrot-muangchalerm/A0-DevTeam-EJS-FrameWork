@@ -1,0 +1,38 @@
+{
+  "name": "devteam-ejs-framework",
+  "version": "2.0.0",
+  "description": "DevTeam Framework 2 คือเฟรมเวิร์กสำหรับพัฒนาเว็บด้วย **Node.js (Express + EJS Layouts)**  \r ออกแบบมาเพื่อรองรับการพัฒนาเว็บแบบ **Single Port** โดยรวมทั้ง Frontend และ Backend ไว้ในเซิร์ฟเวอร์เดียว",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "update": "git fetch framework && git rebase framework/main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rungrotlnwza/DevTeam-EJS-FrameWork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rungrotlnwza/DevTeam-EJS-FrameWork/issues"
+  },
+  "homepage": "https://github.com/rungrotlnwza/DevTeam-EJS-FrameWork#readme",
+  "dependencies": {
+    "connect-livereload": "^0.6.1",
+    "cookie-parser": "^1.4.7",
+    "dot": "^1.1.3",
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "env": "^0.0.2",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "jsonwebtoken": "^9.0.3",
+    "livereload": "^0.10.3",
+    "multer": "^2.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.16.1",
+    "nodemon": "^3.1.11"
+  }
+}
