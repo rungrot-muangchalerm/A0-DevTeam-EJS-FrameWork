@@ -8,4 +8,4 @@
 - โครงสร้างโปรเจกต์เข้าใจง่าย
 - เหมาะสำหรับเว็บแบบ Multi-page
 - JWT middleware สำหรับ authentication และ role
-- MySQL/MariaDB ผ่าน mysql2 (pool)
+- MySQL/MariaDB ผ่าน mysql2 (mysqli)

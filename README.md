@@ -44,6 +44,7 @@ http://localhost:3000
 - [Routing Concept](docs/framework/ROUTING.md)
 - [Project Structure](docs/framework/STRUCTURE.md)
 - [การตั้งค่าระบบ สำหรับ update](docs/framework/SETUP.md)
+- [กฏการเขียนโค้ด](docs/framework/CODING_RULES.md)
 
 ---
 
