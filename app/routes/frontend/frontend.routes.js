@@ -2,13 +2,10 @@ const express = require('express');
 const path = require('path');
 const router = express.Router();
 
-// Path to views from app/routes/frontend/ → ../../../views/
-const viewsBase = path.join(__dirname, '../../../views');
-
 // Home
 router.get('/', (req, res) => {
-  res.render(path.join(viewsBase, 'page/index.ejs'), {
-    layout: path.join(viewsBase, 'layouts/main.layout.ejs'),
+  res.render(path.join('../../../views/page/index.ejs'), {
+    layout: path.join('../../../views/layouts/main.layout.ejs'),
   });
 });
 
