@@ -4,8 +4,8 @@ const router = express.Router();
 
 // Home
 router.get('/', (req, res) => {
-  res.render(path.join('../../../views/page/index.ejs'), {
-    layout: path.join('../../../views/layouts/main.layout.ejs'),
+  res.render(path.join(__dirname, '../../../views/page/index.ejs'), {
+    layout: path.join(__dirname, '../../../views/layouts/main.layout.ejs'),
   });
 });
 
