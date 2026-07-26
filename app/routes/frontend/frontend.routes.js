@@ -9,9 +9,4 @@ router.get('/', (req, res) => {
   });
 });
 
-// Mount frontend sub-routes here, e.g.:
-// router.use('/about', require('./about/about.routes'));
-// router.use('/auth', require('./auth/auth.routes'));
-// router.use('/contact', require('./contact/contact.routes'));
-
 module.exports = router;
