@@ -3,10 +3,10 @@ const path = require('path');
 const router = express.Router();
 
 // Mount frontend routes (render EJS)
-router.use(require('./frontend/frontend.routes'));
+router.use(require('./frontend/frontend.routes.js'));
 
 // Mount API routes
-router.use('/api', require('./api/api.routes'));
+router.use('/api', require('./api/api.routes.js'));
 
 // 404 handler: API/JSON → JSON response, otherwise render 404 page
 router.use((req, res) => {

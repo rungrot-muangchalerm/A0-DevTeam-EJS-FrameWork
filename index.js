@@ -23,10 +23,10 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, 'assets')));
 
 // LiveReload (optional, when LIVERELOAD=true)
-require('./tools/live_server')(app);
+require('./tools/live_server.js')(app);
 
 // Main router (frontend + API)
-app.use(require('./app/routes/router'));
+app.use(require('./app/routes/router.js'));
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
