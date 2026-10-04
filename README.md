@@ -9,10 +9,16 @@ DevTeam Framework 2 คือเฟรมเวิร์กสำหรับพ
 
 ### Requirements
 
-- Node.js v16 ขึ้นไป
+- Node.js v18 ขึ้นไป
 - npm
 
-### Install
+### Install from npm
+
+```bash
+npm i devteam-ejs-framework
+```
+
+### Install for local development
 
 ```bash
 npm install
@@ -21,6 +27,12 @@ npm install
 ---
 
 ## Running the Project
+
+### Production Mode
+
+```bash
+npm start
+```
 
 ### Development Mode
 
