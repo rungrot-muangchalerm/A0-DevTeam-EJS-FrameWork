@@ -114,19 +114,19 @@
 8. ติดตั้ง mariadb-server
 
    ```bash
-   sudo apt install mariadb-server -y
+   apt install mariadb-server -y
    ```
 
 9. ตั้งค่าเริ่มต้นของ MySQL
 
    ```bash
-   sudo mysql_secure_installation
+   mysql_secure_installation
    ```
 
 10. เข้า MySQL
 
    ```bash
-   sudo mysql
+   mysql
    ```
 
 11. ให้สิทธิ์ `root` ตามคำสั่งเดิม
@@ -144,7 +144,7 @@
 13. ตรวจสอบสถานะ mariadb
 
    ```bash
-   sudo systemctl status mariadb
+   systemctl status mariadb
    ```
 
 14. ลง phpmyadmin
@@ -170,7 +170,7 @@
 18. จากนั้นค่อยใช้คำสั่ง bash เพื่อรัน script ที่ดาวน์โหลดมา
 
    ```bash
-   sudo bash /tmp/nodesource_setup.sh
+   bash /tmp/nodesource_setup.sh
    ```
 
 19. ติดตั้ง nodejs
