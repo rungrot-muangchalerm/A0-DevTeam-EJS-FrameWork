@@ -1,3 +1,5 @@
+[คู่มือ Ubuntu](../README.md) | [รวมเอกสาร](../../README.md) | [หน้าหลักโปรเจกต์](../../../README.md)
+
 # ติดตั้ง Ubuntu Local บน Windows (WSL) และตั้งค่า root
 
 1. เปิด PowerShell แบบ Run as administrator แล้วติดตั้ง Ubuntu

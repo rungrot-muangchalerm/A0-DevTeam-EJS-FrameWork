@@ -1,3 +1,5 @@
+[คู่มือ Ubuntu](../README.md) | [รวมเอกสาร](../../README.md) | [หน้าหลักโปรเจกต์](../../../README.md)
+
 # How to Setup server Website
 
 ## วิธีทำให้ VPS ใช้ user root ได้

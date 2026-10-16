@@ -1,3 +1,5 @@
+[รวมเอกสาร](../README.md) | [หน้าหลักโปรเจกต์](../../README.md)
+
 # Routing Concept
 
 DevTeam Framework 2 ใช้ Router กลางเพื่อรวมเส้นทางทั้งหมดของระบบ  

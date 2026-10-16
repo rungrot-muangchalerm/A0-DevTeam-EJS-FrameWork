@@ -1,3 +1,5 @@
+[รวมเอกสาร](../README.md) | [หน้าหลักโปรเจกต์](../../README.md)
+
 # Features
 
 - ใช้ **Port เดียว** สำหรับทั้ง Frontend และ Backend

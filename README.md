@@ -50,13 +50,7 @@ http://localhost:3000
 
 ## Additional Documentation
 
-- [แนวคิดและที่มา](docs/framework/CONCEPT.md)
-- [Features](docs/framework/FEATURES.md)
-- [Environment Variables](docs/framework/ENVIRONMENT.md)
-- [Routing Concept](docs/framework/ROUTING.md)
-- [Project Structure](docs/framework/STRUCTURE.md)
-- [การตั้งค่าระบบ สำหรับ update](docs/framework/SETUP.md)
-- [กฏการเขียนโค้ด](docs/framework/CODING_RULES.md)
+- [เอกสารทั้งหมด](docs/README.md)
 
 ---
 

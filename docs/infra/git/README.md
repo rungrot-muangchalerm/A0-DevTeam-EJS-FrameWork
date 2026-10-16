@@ -1,3 +1,5 @@
+[รวมเอกสาร](../../README.md) | [หน้าหลักโปรเจกต์](../../../README.md)
+
 # ติดตั้ง Git และเชื่อมต่อ GitHub บน VPS
 
 รันบน VPS Ubuntu/Debian ด้วย user `root`
