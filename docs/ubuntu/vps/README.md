@@ -98,14 +98,36 @@
 5. ติดตั้ง certificate และ package ที่จำเป็นก่อนเพิ่ม repository
 
    ```bash
-   apt install ca-certificates apt-transport-https software-properties-common -y
+   apt install ca-certificates apt-transport-https software-properties-common curl lsb-release -y
    ```
 
-6. เพิ่ม `ppa:ondrej/php`
+6. เพิ่ม repository สำหรับ PHP 7.4 (คัดลอกทั้งชุด รันด้วย `root`)
 
    ```bash
-   add-apt-repository ppa:ondrej/php -y
+   (
+       set -e
+       ubuntu_codename=$(lsb_release -sc)
+       case "$ubuntu_codename" in
+           resolute)
+               curl -fSsLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb
+               dpkg -i /tmp/debsuryorg-archive-keyring.deb
+               echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $ubuntu_codename main" > /etc/apt/sources.list.d/php.list
+               ;;
+           jammy|noble)
+               add-apt-repository ppa:ondrej/php -y
+               ;;
+           *)
+               echo "ยังไม่ได้กำหนด repository สำหรับ Ubuntu $ubuntu_codename"
+               exit 1
+               ;;
+       esac
+       apt update
+       apt-cache policy php7.4-fpm
+       apt-get install --simulate php7.4-fpm
+   )
    ```
+
+   ถ้าชุดคำสั่งจบโดยไม่มี error ให้ทำข้อ 7 ต่อได้เลย
 
 7. ติดตั้ง PHP 7.4 และ extension ที่ต้องใช้
 
@@ -119,34 +141,35 @@
    apt install mariadb-server -y
    ```
 
-9. ตั้งค่าเริ่มต้นของ MySQL
+9. ตั้งค่าเริ่มต้นของ MariaDB (รันใน shell)
 
    ```bash
-   mysql_secure_installation
+   mariadb-secure-installation
    ```
 
-10. เข้า MySQL
+10. เข้า MariaDB
 
    ```bash
-   mysql
+   mariadb -u root -p
    ```
 
-11. ให้สิทธิ์ `root` ตามคำสั่งเดิม
+11. ให้สิทธิ์ `root` ในหน้า `MariaDB>` (เปลี่ยน `<รหัสผ่านที่ตั้งเอง>` เป็นรหัสที่ต้องการก่อนรัน)
 
-   ```bash
+   ```sql
    GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '<รหัสผ่านที่ตั้งเอง>' WITH GRANT OPTION;
    ```
 
-12. refresh สิทธิ์
+12. refresh สิทธิ์ แล้วออกจาก MariaDB
 
-   ```bash
+   ```sql
    FLUSH PRIVILEGES;
+   exit;
    ```
 
-13. ตรวจสอบสถานะ mariadb
+13. ตรวจสอบสถานะ MariaDB หลังกลับมาเห็น prompt `root@...#`
 
    ```bash
-   systemctl status mariadb
+   systemctl status mariadb --no-pager
    ```
 
 14. ลง phpmyadmin
