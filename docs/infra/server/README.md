@@ -178,3 +178,10 @@
    ```bash
    apt install nodejs -y
    ```
+
+20. ติดตั้ง PM2
+
+   ```bash
+   npm install -g pm2
+   pm2 --version
+   ```
