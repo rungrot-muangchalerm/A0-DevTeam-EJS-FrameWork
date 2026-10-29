@@ -25,12 +25,12 @@
 
 3. คัดลอก public key ที่แสดง ไปวางใน GitHub → Settings → SSH and GPG keys → New SSH key → Authentication key → Add SSH key (ถ้าเพิ่มไว้แล้วให้ข้าม)
 
-4. ตั้งค่า SSH (ถ้ามี `Host github-a0-devteam` อยู่แล้ว ให้แก้รายการเดิมแทนการเพิ่มซ้ำ)
+4. ตั้งค่า SSH (ถ้ามี `Host github.com` อยู่แล้ว ให้แก้รายการเดิมแทนการเพิ่มซ้ำ)
 
    ```bash
    cat >> ~/.ssh/config <<'EOF'
 
-   Host github-a0-devteam
+   Host github.com
        HostName github.com
        User git
        IdentityFile ~/.ssh/github_a0_devteam
@@ -42,7 +42,7 @@
 5. ทดสอบเชื่อมต่อ GitHub
 
    ```bash
-   ssh -T git@github-a0-devteam
+   ssh -T git@github.com
    ```
 
    ครั้งแรกให้เทียบ fingerprint กับ [GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints) แล้วตอบ `yes` ถ้าตรงกัน เมื่อสำเร็จจะขึ้น `Hi ...! You've successfully authenticated...`
@@ -51,14 +51,14 @@
 
    ```bash
    cd /home/www
-   git remote set-url origin git@github-a0-devteam:rungrot-muangchalerm/A0-DevTeam-EJS-FrameWork.git
+   git remote set-url origin git@github.com:rungrot-muangchalerm/A0-DevTeam-EJS-FrameWork.git
    git pull
    ```
 
    ถ้ายังไม่มีโปรเจกต์ ให้ clone แทนข้อ 6:
 
    ```bash
-   git clone git@github-a0-devteam:rungrot-muangchalerm/A0-DevTeam-EJS-FrameWork.git /home/www
+   git clone git@github.com:rungrot-muangchalerm/A0-DevTeam-EJS-FrameWork.git /home/www
    ```
 
 7. อัปเดตงานครั้งถัดไป
