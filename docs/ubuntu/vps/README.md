@@ -22,7 +22,7 @@
 2. อัปเกรด package ในระบบ
 
    ```bash
-   apt upgrade
+   apt upgrade -y
    ```
 
 3. ติดตั้ง nginx
