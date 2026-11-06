@@ -31,7 +31,19 @@
    apt install nginx -y
    ```
 
-4. สร้าง config ของ nginx, สร้างโฟลเดอร์ `/home/website` และสร้างไฟล์ `index.php`
+4. ติดตั้ง Certbot และขอ SSL certificate สำหรับ Public IP (ใช้ Certbot 5.3 ขึ้นไป)
+
+   ```bash
+   apt install curl snapd -y
+   snap install --classic certbot
+   ln -sf /snap/bin/certbot /usr/bin/certbot
+   PUBLIC_IP=$(curl -4fsS https://api.ipify.org)
+   certbot certonly --standalone --cert-name vps-ip --preferred-profile shortlived --ip-address "$PUBLIC_IP" --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"
+   ```
+
+   เมื่อ Certbot ถามอีเมล ให้กรอกอีเมลหรือกด Enter เพื่อข้าม แล้วตอบ `Y` เพื่อยอมรับเงื่อนไข
+
+5. สร้าง config ของ nginx, สร้างโฟลเดอร์ `/home/website` และสร้างไฟล์ `index.php`
 
    ```bash
    cat > /etc/nginx/nginx.conf <<END
@@ -70,20 +82,30 @@
 
    ?>
    " > /home/website/index.php
+    PUBLIC_IP=$(curl -4fsS https://api.ipify.org)
     args='$args'
     uri='$uri'
+    host='$host'
+    request_uri='$request_uri'
     document_root='$document_root'
     fastcgi_script_name='$fastcgi_script_name'
     cat > /etc/nginx/conf.d/vps.conf <<END
-   server {
-       listen 80;
-       server_name  127.0.0.1 localhost;
-       access_log /var/log/nginx/vps-access.log;
-       error_log /var/log/nginx/vps-error.log error;
-       root   /home/website;
-       location / {
-           index  index.html index.htm index.php;
-    try_files $uri $uri/ /index.php?$args;
+    server {
+        listen 80 default_server;
+        server_name $PUBLIC_IP;
+        return 301 https://$host$request_uri;
+    }
+    server {
+        listen 443 ssl default_server;
+        server_name $PUBLIC_IP;
+        access_log /var/log/nginx/vps-access.log;
+        error_log /var/log/nginx/vps-error.log error;
+        root   /home/website;
+        ssl_certificate /etc/letsencrypt/live/vps-ip/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/vps-ip/privkey.pem;
+        location / {
+            index  index.html index.htm index.php;
+     try_files $uri $uri/ /index.php?$args;
        }
        location ~ \.php$ {
            include /etc/nginx/fastcgi_params;
@@ -93,15 +115,16 @@
        }
    }
    END
+   nginx -t && systemctl restart nginx
    ```
 
-5. ติดตั้ง certificate และ package ที่จำเป็นก่อนเพิ่ม repository
+6. ติดตั้ง package ที่จำเป็นก่อนเพิ่ม repository
 
    ```bash
    apt install ca-certificates apt-transport-https software-properties-common curl lsb-release -y
    ```
 
-6. เพิ่ม repository สำหรับ PHP 8.4 (คัดลอกทั้งชุด รันด้วย `root`)
+7. เพิ่ม repository สำหรับ PHP 8.4 (คัดลอกทั้งชุด รันด้วย `root`)
 
    ```bash
    (
@@ -127,86 +150,86 @@
    )
    ```
 
-   ถ้าชุดคำสั่งจบโดยไม่มี error ให้ทำข้อ 7 ต่อได้เลย
+   ถ้าชุดคำสั่งจบโดยไม่มี error ให้ทำข้อ 8 ต่อได้เลย
 
-7. ติดตั้ง PHP 8.4 และ extension ที่ต้องใช้
+8. ติดตั้ง PHP 8.4 และ extension ที่ต้องใช้
 
    ```bash
    apt-get install php8.4 php8.4-cli php8.4-cgi php8.4-fpm php8.4-gd php8.4-mysql php8.4-imap php8.4-curl php8.4-intl php8.4-pspell php8.4-sqlite3 php8.4-tidy php8.4-xsl php8.4-zip php8.4-mbstring php8.4-soap php8.4-opcache php8.4-common php8.4-readline php8.4-xml -y
    php8.4 -v
    ```
 
-8. ติดตั้ง mariadb-server
+9. ติดตั้ง mariadb-server
 
    ```bash
    apt install mariadb-server -y
    ```
 
-9. ตั้งค่าเริ่มต้นของ MariaDB (รันใน shell)
+10. ตั้งค่าเริ่มต้นของ MariaDB (รันใน shell)
 
    ```bash
    mariadb-secure-installation
    ```
 
-10. เข้า MariaDB
+11. เข้า MariaDB
 
    ```bash
    mariadb -u root -p
    ```
 
-11. ให้สิทธิ์ `root` ในหน้า `MariaDB>` (เปลี่ยน `<รหัสผ่านที่ตั้งเอง>` เป็นรหัสที่ต้องการก่อนรัน)
+12. ให้สิทธิ์ `root` ในหน้า `MariaDB>` (เปลี่ยน `<รหัสผ่านที่ตั้งเอง>` เป็นรหัสที่ต้องการก่อนรัน)
 
    ```sql
    GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '<รหัสผ่านที่ตั้งเอง>' WITH GRANT OPTION;
    ```
 
-12. refresh สิทธิ์ แล้วออกจาก MariaDB
+13. refresh สิทธิ์ แล้วออกจาก MariaDB
 
    ```sql
    FLUSH PRIVILEGES;
    exit;
    ```
 
-13. ตรวจสอบสถานะ MariaDB หลังกลับมาเห็น prompt `root@...#`
+14. ตรวจสอบสถานะ MariaDB หลังกลับมาเห็น prompt `root@...#`
 
    ```bash
    systemctl status mariadb --no-pager
    ```
 
-14. ลง phpmyadmin
+15. ลง phpmyadmin
 
-15. restart nginx
+16. restart nginx
 
    ```bash
    service nginx restart
    ```
 
-16. ติดตั้ง npm
+17. ติดตั้ง npm
 
    ```bash
    apt install npm -y
    ```
 
-17. ดาวน์โหลด script setup ของ Node.js 26 LTS
+18. ดาวน์โหลด script setup ของ Node.js 26 LTS
 
    ```bash
    curl -fsSL https://deb.nodesource.com/setup_26.x -o /tmp/nodesource_setup.sh
    ```
 
-18. จากนั้นค่อยใช้คำสั่ง bash เพื่อรัน script ที่ดาวน์โหลดมา
+19. จากนั้นค่อยใช้คำสั่ง bash เพื่อรัน script ที่ดาวน์โหลดมา
 
    ```bash
    bash /tmp/nodesource_setup.sh
    ```
 
-19. ติดตั้ง Node.js และตรวจสอบเวอร์ชัน
+20. ติดตั้ง Node.js และตรวจสอบเวอร์ชัน
 
    ```bash
    apt install nodejs -y
    node -v
    ```
 
-20. ติดตั้ง PM2
+21. ติดตั้ง PM2
 
    ```bash
    npm install -g pm2
