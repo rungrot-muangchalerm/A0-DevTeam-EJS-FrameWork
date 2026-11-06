@@ -187,10 +187,10 @@
    apt install npm -y
    ```
 
-17. ดาวน์โหลด script setup ของ NodeSource มาก่อน
+17. ดาวน์โหลด script setup ของ Node.js 26 LTS
 
    ```bash
-   curl -sL https://deb.nodesource.com/setup_23.x -o /tmp/nodesource_setup.sh
+   curl -fsSL https://deb.nodesource.com/setup_26.x -o /tmp/nodesource_setup.sh
    ```
 
 18. จากนั้นค่อยใช้คำสั่ง bash เพื่อรัน script ที่ดาวน์โหลดมา
@@ -199,10 +199,11 @@
    bash /tmp/nodesource_setup.sh
    ```
 
-19. ติดตั้ง nodejs
+19. ติดตั้ง Node.js และตรวจสอบเวอร์ชัน
 
    ```bash
    apt install nodejs -y
+   node -v
    ```
 
 20. ติดตั้ง PM2
