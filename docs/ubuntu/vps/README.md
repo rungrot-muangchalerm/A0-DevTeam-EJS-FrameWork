@@ -87,7 +87,7 @@
        }
        location ~ \.php$ {
            include /etc/nginx/fastcgi_params;
-           fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+           fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
            fastcgi_index index.php;
            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
        }
@@ -101,7 +101,7 @@
    apt install ca-certificates apt-transport-https software-properties-common curl lsb-release -y
    ```
 
-6. เพิ่ม repository สำหรับ PHP 7.4 (คัดลอกทั้งชุด รันด้วย `root`)
+6. เพิ่ม repository สำหรับ PHP 8.4 (คัดลอกทั้งชุด รันด้วย `root`)
 
    ```bash
    (
@@ -122,17 +122,20 @@
                ;;
        esac
        apt update
-       apt-cache policy php7.4-fpm
-       apt-get install --simulate php7.4-fpm
+       apt-cache policy php8.4-fpm
+       apt-get install --simulate php8.4-fpm
    )
    ```
 
    ถ้าชุดคำสั่งจบโดยไม่มี error ให้ทำข้อ 7 ต่อได้เลย
 
-7. ติดตั้ง PHP 7.4 และ extension ที่ต้องใช้
+7. ติดตั้ง PHP 8.4 และ extension ที่ต้องใช้
+
+   PHP 8.4 มีแพตช์แก้ช่องโหว่ PHP-CGI argument injection (CVE-2024-4577 หรือ PHP-to-shell) แล้ว โดยรุ่นที่แก้ไขเริ่มตั้งแต่ PHP 8.1.29, 8.2.20 และ 8.3.8 ควรอัปเดตแพ็กเกจเป็นรุ่นล่าสุดจาก repository อย่างสม่ำเสมอเพื่อรับ security fixes ใหม่
 
    ```bash
-   apt-get install php7.4 php7.4-cli php7.4-cgi php7.4-fpm php7.4-gd php7.4-mysql php7.4-imap php7.4-curl php7.4-intl php7.4-pspell php7.4-sqlite3 php7.4-tidy php7.4-xmlrpc php7.4-xsl php7.4-zip php7.4-mbstring php7.4-soap php7.4-opcache php7.4-common php7.4-json php7.4-readline php7.4-xml -y
+   apt-get install php8.4 php8.4-cli php8.4-cgi php8.4-fpm php8.4-gd php8.4-mysql php8.4-imap php8.4-curl php8.4-intl php8.4-pspell php8.4-sqlite3 php8.4-tidy php8.4-xsl php8.4-zip php8.4-mbstring php8.4-soap php8.4-opcache php8.4-common php8.4-readline php8.4-xml -y
+   php8.4 -v
    ```
 
 8. ติดตั้ง mariadb-server
