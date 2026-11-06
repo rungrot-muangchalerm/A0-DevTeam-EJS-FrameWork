@@ -12,6 +12,7 @@
 - [Routing](framework/ROUTING.md)
 - [การตั้งค่าระบบและอัปเดต](framework/SETUP.md)
 - [กฎการเขียนโค้ด](framework/CODING_RULES.md)
+- [แนวทางการเขียนโค้ดและการมีส่วนร่วม](CONTRIBUTING.md)
 - [JWT Middleware](framework/JWT-MIDDLEWARE.md)
 - [ฐานข้อมูล MySQL/MariaDB](framework/DATABASE.md)
 
