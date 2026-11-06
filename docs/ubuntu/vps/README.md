@@ -131,8 +131,6 @@
 
 7. ติดตั้ง PHP 8.4 และ extension ที่ต้องใช้
 
-   PHP 8.4 มีแพตช์แก้ช่องโหว่ PHP-CGI argument injection (CVE-2024-4577 หรือ PHP-to-shell) แล้ว โดยรุ่นที่แก้ไขเริ่มตั้งแต่ PHP 8.1.29, 8.2.20 และ 8.3.8 ควรอัปเดตแพ็กเกจเป็นรุ่นล่าสุดจาก repository อย่างสม่ำเสมอเพื่อรับ security fixes ใหม่
-
    ```bash
    apt-get install php8.4 php8.4-cli php8.4-cgi php8.4-fpm php8.4-gd php8.4-mysql php8.4-imap php8.4-curl php8.4-intl php8.4-pspell php8.4-sqlite3 php8.4-tidy php8.4-xsl php8.4-zip php8.4-mbstring php8.4-soap php8.4-opcache php8.4-common php8.4-readline php8.4-xml -y
    php8.4 -v
