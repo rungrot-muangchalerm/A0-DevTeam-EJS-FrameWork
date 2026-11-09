@@ -26,4 +26,5 @@
 - [ติดตั้ง Ubuntu Local (WSL), root และ SSH/SFTP](ubuntu/server/README.md)
 - [ตั้งค่าเว็บเซิร์ฟเวอร์บน VPS](ubuntu/vps/README.md)
 - [ติดตั้ง Git และเชื่อมต่อ GitHub บน VPS](infra/git/README.md)
-- [คอนฟิก Nginx สำหรับ phpMyAdmin พอร์ต 8080](infra/nginx/phpmyadmin.conf)
+- [Node.js ผ่าน HTTPS ด้วย Nginx](infra/nginx/example.node.md)
+- [phpMyAdmin ผ่าน HTTPS ด้วย Nginx](infra/nginx/phpmyadmin.md)
